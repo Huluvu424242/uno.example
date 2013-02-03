@@ -1,4 +1,6 @@
 package test;
+
+import com.sun.star.lang.XMultiComponentFactory;
 /******************************************************************************
  |FirstUnoContact.java|  -  TODO description
 
@@ -14,9 +16,10 @@ package test;
  *   (at your option) any later version.                                      *
  *                                                                            *
  ******************************************************************************/
+import com.sun.star.uno.XComponentContext;
 
 
-/**
+/** 
  * @author SchubertT006
  *
  */
@@ -32,12 +35,12 @@ public class FirstUnoContact {
     private static void execution() {
         try {
             // get the remote office component context
-            com.sun.star.uno.XComponentContext xContext = com.sun.star.comp.helper.Bootstrap
+            XComponentContext xContext = com.sun.star.comp.helper.Bootstrap
                     .bootstrap();
  
             System.out.println("Connected to a running office ...");
  
-            com.sun.star.lang.XMultiComponentFactory xMCF = xContext
+            XMultiComponentFactory xMCF = xContext
                     .getServiceManager();
  
             String available = (xMCF != null ? "available" : "not available");
