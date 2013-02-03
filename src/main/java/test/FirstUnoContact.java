@@ -1,8 +1,14 @@
 package test;
 
+import com.sun.star.beans.PropertyValue;
 import com.sun.star.comp.helper.Bootstrap;
+import com.sun.star.frame.FrameSearchFlag;
+import com.sun.star.frame.XComponentLoader;
+import com.sun.star.lang.XComponent;
 import com.sun.star.lang.XMultiComponentFactory;
+import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
+
 /******************************************************************************
  |FirstUnoContact.java|  -  TODO description
 
@@ -19,13 +25,12 @@ import com.sun.star.uno.XComponentContext;
  *                                                                            *
  ******************************************************************************/
 
-
 /** 
  * @author SchubertT006
  *
  */
 public class FirstUnoContact {
-    
+
     public static void main(String[] args) {
         execution();
     }
@@ -36,16 +41,24 @@ public class FirstUnoContact {
     private static void execution() {
         try {
             // get the remote office component context
-            XComponentContext xContext = Bootstrap
-                    .bootstrap();
- 
+            XComponentContext context = Bootstrap.bootstrap();
+
             System.out.println("Connected to a running office ...");
- 
-            XMultiComponentFactory xMCF = xContext
-                    .getServiceManager();
- 
-            String available = (xMCF != null ? "available" : "not available");
+
+            XMultiComponentFactory factory = context.getServiceManager();
+
+            String available = (factory != null ? "available" : "not available");
             System.out.println("remote ServiceManager is " + available);
+
+            Object desktop = factory.createInstanceWithContext(
+                    "com.sun.star.frame.Desktop", context);
+            XComponentLoader loader = (XComponentLoader) UnoRuntime
+                    .queryInterface(XComponentLoader.class, desktop);
+
+            XComponent writer=loader.loadComponentFromURL("private:factory/swriter", "_blank",
+                    FrameSearchFlag.ALL, new PropertyValue[] {});
+            
+
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         } finally {
@@ -53,7 +66,6 @@ public class FirstUnoContact {
         }
     }
 }
-
 
 /**
 * ChangeLog

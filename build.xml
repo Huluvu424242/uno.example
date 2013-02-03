@@ -10,8 +10,8 @@
     <!-- Paths based on the standard installation of OOo 3.0.1 and OOo SDK 3.0.1 on unix -->
     <property name="OFFICE_ROOT" value="C:\usr\portableapps\PortableApps\LibreOfficePortable" />
     <property name="OFFICE_HOME" value="${OFFICE_ROOT}/App/libreoffice" />
-    <property name="OO_SDK_HOME" value="${OFFICE_HOME}/sdk" />
-    <property name="OO_URE_HOME" value="${OFFICE_ROOT}/ure" />
+    <property name="OO_SDK_HOME" value="${OFFICE_HOME}/program" />
+    <property name="OO_URE_HOME" value="${OFFICE_HOME}/ure" />
 	<property name="ClassLoaderName" value="Loader" />
  
     <target name="init">
@@ -46,10 +46,11 @@
             <exclude name="**/*.java" />
             <exclude name="*.jar" />
             <fileset refid="bootstrap.glue.code" />
+        	<fileset refid="office.class.path"/>
             <manifest>
                 <attribute name="Main-Class" value="com.sun.star.lib.loader.${ClassLoaderName}" />
                 <section name="com/sun/star/lib/loader/${ClassLoaderName}.class">
-                    <attribute name="Application-Class" value="info.thomas_michel.example.oo_api.FirstUnoContact" />
+                    <attribute name="Application-Class" value="test.FirstUnoContact" />
                 </section>
             </manifest>
         </jar>
