@@ -6,6 +6,8 @@ import com.sun.star.frame.FrameSearchFlag;
 import com.sun.star.frame.XComponentLoader;
 import com.sun.star.lang.XComponent;
 import com.sun.star.lang.XMultiComponentFactory;
+import com.sun.star.text.XText;
+import com.sun.star.text.XTextDocument;
 import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 
@@ -55,9 +57,15 @@ public class FirstUnoContact {
             XComponentLoader loader = (XComponentLoader) UnoRuntime
                     .queryInterface(XComponentLoader.class, desktop);
 
-            XComponent writer=loader.loadComponentFromURL("private:factory/swriter", "_blank",
-                    FrameSearchFlag.ALL, new PropertyValue[] {});
+            XComponent writer = loader.loadComponentFromURL(
+                    "private:factory/swriter", "_blank", FrameSearchFlag.ALL,
+                    new PropertyValue[] {});
             
+            XTextDocument document = (XTextDocument) UnoRuntime.queryInterface(
+                    XTextDocument.class, writer);
+            XText textCursor=document.getText();
+            textCursor.setString("Hallo ich bin Dein Office !!!");
+           
 
         } catch (java.lang.Exception e) {
             e.printStackTrace();
