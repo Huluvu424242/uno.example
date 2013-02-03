@@ -46,7 +46,6 @@
             <exclude name="**/*.java" />
             <exclude name="*.jar" />
             <fileset refid="bootstrap.glue.code" />
-        	<fileset refid="office.class.path"/>
             <manifest>
                 <attribute name="Main-Class" value="com.sun.star.lib.loader.${ClassLoaderName}" />
                 <section name="com/sun/star/lib/loader/${ClassLoaderName}.class">
@@ -61,7 +60,9 @@
     </target>
  
     <target name="run" description="Try running it." depends="all">
-        <java jar="${OUT_DIR}/FirstUnoContact.jar" failonerror="true" fork="true">
+        <java jar="${OUT_DIR}/FirstUnoContact.jar" 
+    	classpathref="office.class.path"
+    	failonerror="true" fork="true">
         </java>
     </target>
  
