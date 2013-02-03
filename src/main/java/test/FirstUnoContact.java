@@ -1,6 +1,8 @@
 package test;
 
+import com.sun.star.comp.helper.Bootstrap;
 import com.sun.star.lang.XMultiComponentFactory;
+import com.sun.star.uno.XComponentContext;
 /******************************************************************************
  |FirstUnoContact.java|  -  TODO description
 
@@ -16,7 +18,6 @@ import com.sun.star.lang.XMultiComponentFactory;
  *   (at your option) any later version.                                      *
  *                                                                            *
  ******************************************************************************/
-import com.sun.star.uno.XComponentContext;
 
 
 /** 
@@ -35,7 +36,7 @@ public class FirstUnoContact {
     private static void execution() {
         try {
             // get the remote office component context
-            XComponentContext xContext = com.sun.star.comp.helper.Bootstrap
+            XComponentContext xContext = Bootstrap
                     .bootstrap();
  
             System.out.println("Connected to a running office ...");
